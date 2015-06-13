@@ -4,16 +4,117 @@
         height: 100%;
     }
 
+ .slider-horizontal {
+        width: 80% !important;
+    }
+
 </style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            Měsíční nájemné (Kč):
+        </div>
+        <div class="col-md-4">
+            <input id="price" type="text" class="span2" value="" data-slider-min="2000" data-slider-max="20000" data-slider-step="500" data-slider-value="[1000,10000]"> <span id="price-range"></span>
+        </div>
+        <div class="col-md-2">
+            Plocha (m2):
+        </div>
+        <div class="col-md-4">
+            <input id="area" type="text" class="span2" value="" data-slider-min="10" data-slider-max="300" data-slider-step="5" data-slider-value="[20,100]"> <span id="area-range"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label>
+            <input type="checkbox" value="1" name="status" id="status"> Pouze volné byty
+            </label>
+        </div>
+    </div>
+</div>
+
+<br>
+
 <div id="map"></div>
 <script>
+
+    $(function() {
+        $("#price").slider({});
+        $("#area").slider({});
+
+        $("#price").on("slide", function(slideEvt) {
+            var val = slideEvt.value;
+            $('#price-range').html(val[0] + ' - ' + val[1]);
+            setTimeout(loadGeoData, 800);
+        });
+
+        $("#area").on("slide", function(slideEvt) {
+            var val = slideEvt.value;
+            $('#area-range').html(val[0] + ' - ' + val[1]);
+
+            setTimeout(loadGeoData, 800);
+        });
+
+        loadGeoData();
+    });
+
+    function loadGeoData()
+    {
+        var id = window.setTimeout(function() {}, 0);
+
+        while (id--) {
+            window.clearTimeout(id); // will do nothing if no timeout with id is present
+        }
+
+        var latLng = map.getCenter();
+
+        var url =  "<?= $baseUrl ?>/data/flats-geo.json";
+
+        url += '?area=' + $('#area').val();
+        url += '&price=' + $('#price').val();
+        url += '&status=' + $('#status').is(":checked");
+        url += '&lat=' + latLng.lat;
+        url += '&lng=' + latLng.lng;
+
+        console.log(url);
+
+        $.getJSON(url, function( data ) {
+            flats = data.features;
+
+            flats.forEach(function (flat, key) {
+                marker = L.marker([flat.geometry.coordinates[1], flat.geometry.coordinates[0]]);
+                var street = flat.properties.street + ' ' + flat.properties.num_desc;
+                if (flat.num_orient){
+                    street += '/' + flat.properties.num_orient;
+                }
+
+                marker.bindPopup(
+                    '<p style="font-size: 1.5em">' +
+                    '<strong>' + street + '</strong><br>' +
+                    'Nájemné: ' + flat.properties.rent +' Kč<br>' +
+                    'Plocha: ' + flat.properties.area + ' m2<br>' +
+                    'Stav: ' + flat.properties.status + '<br>' +
+                    '<a href="#"' +
+                    'data-toggle="modal"' +
+                    'data-target="#modal-flat" ' +
+                    'data-title="' + street + '" ' +
+                    'data-rent="' + flat.properties.rent + '" ' +
+                    'data-area="' + flat.properties.area + '" ' +
+                    'data-status="' + flat.properties.status + '" ' +
+                    'data-district="' + flat.properties.city_district + '" ' +
+                    '">Zobrazit detail nabídky</a>' +
+                    '</p>'
+                );
+                marker.addTo(map);
+            });
+        });
+    }
 
     var map = L.map('map', {
         center: [50.063882, 14.444922],
         zoom: 12
     });
-
-//    var map = L.map('map');
 
     L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
         maxZoom: 18,
@@ -37,40 +138,14 @@
         alert(e.message);
     }
 
+    function onDragEnd(e) {
+        setTimeout(loadGeoData, 300);
+    }
+
     map.on('locationfound', onLocationFound);
     map.on('locationerror', onLocationError);
+    map.on('dragend', onDragEnd);
     map.locate({setView: true, maxZoom: 14});
-
-    $.getJSON( "<?= $baseUrl ?>/data/flats-geo.json", function( data ) {
-        flats = data.features;
-
-        flats.forEach(function (flat, key) {
-            marker = L.marker([flat.geometry.coordinates[1], flat.geometry.coordinates[0]]);
-            var street = flat.properties.street + ' ' + flat.properties.num_desc;
-            if (flat.num_orient){
-                street += '/' + flat.properties.num_orient;
-            }
-
-            marker.bindPopup(
-                '<p style="font-size: 1.5em">' +
-                '<strong>' + street + '</strong><br>' +
-                'Nájemné: ' + flat.properties.rent +' Kč<br>' +
-                'Plocha: ' + flat.properties.area + ' m2<br>' +
-                'Stav: ' + flat.properties.status + '<br>' +
-                '<a href="#"' +
-                'data-toggle="modal"' +
-                'data-target="#modal-flat" ' +
-                'data-title="' + street + '" ' +
-                'data-rent="' + flat.properties.rent + '" ' +
-                'data-area="' + flat.properties.area + '" ' +
-                'data-status="' + flat.properties.status + '" ' +
-                'data-district="' + flat.properties.city_district + '" ' +
-                '">Zobrazit detail nabídky</a>' +
-                '</p>'
-            );
-            marker.addTo(map);
-        });
-    });
 
     $(function() {
         $('#modal-flat').on('show.bs.modal', function (e) {
@@ -104,11 +179,27 @@
                 <h4 class="modal-title" id="myModalLabel" style="font-size: 2em">Modal title</h4>
             </div>
             <div class="modal-body">
-                <p style="font-size: 1.5em">
-                    Nájemné: <span id="flat-rent"></span> Kč <br>
-                    Plocha: <span id="flat-area"></span> m2 <br>
-                    Stav: <span id="flat-status"></span> <br>
-                </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p style="font-size: 1.5em">
+                                Nájemné: <span id="flat-rent"></span> Kč <br>
+                                Plocha: <span id="flat-area"></span> m2 <br>
+                                Stav: <span id="flat-status"></span> <br>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="#" style="font-size: 2em">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>
+                            </a>
+
+                            &nbsp;&nbsp;
+
+                            <a href="#" style="font-size: 2em">
+                                <span class="glyphicon glyphicon-thumbs-down"></span>
+                            </a>
+                        </div>
+                    </div>
+
             </div>
             <div class="modal-footer">
                 <a href="tel:+420236002435" class="btn btn-primary" id="phone-link">

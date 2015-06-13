@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://bootswatch.com/assets/css/bootswatch.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
     <link rel="stylesheet" href="<?= $baseUrl ?>/assets/styles.css">
+    <link rel="stylesheet" href="http://seiyria.github.io/bootstrap-slider/stylesheets/bootstrap-slider.css">
     <link type="text/plain" rel="author" href="<?= $baseUrl ?>/humans.txt">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -27,7 +28,7 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
     <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
     <script src="<?= $baseUrl ?>/assets/store.min.js"></script>
-
+    <script src="http://seiyria.github.io/bootstrap-slider/javascripts/bootstrap-slider.js"></script>
     <script>
         function toggleFullScreen() {
             if (!document.fullscreenElement &&    // alternative standard method
