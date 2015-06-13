@@ -8,7 +8,12 @@
 <div id="map"></div>
 <script>
 
-    var map = L.map('map');
+    var map = L.map('map', {
+        center: [50.063882, 14.444922],
+        zoom: 12
+    });
+
+//    var map = L.map('map');
 
     L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
         maxZoom: 18,
@@ -22,7 +27,7 @@
         var radius = e.accuracy / 2;
 
         L.marker(e.latlng).addTo(map)
-            .bindPopup("You are within " + radius + " meters from this point").openPopup();
+            .bindPopup("Nacházíte se přibližně " + radius + " metrů od této pozice").openPopup();
 
         L.circle(e.latlng, radius).addTo(map);
     }
@@ -36,6 +41,23 @@
     map.on('locationerror', onLocationError);
     map.locate({setView: true, maxZoom: 14});
 
+    $.getJSON( "/praguehacks/data/flats.json", function( flats ) {
+        flats.forEach(function (flat, key) {
+            marker = L.marker([flat.lat, flat.lng]);
+            marker.bindPopup(
+                '<p style="font-size: 1.5em">' +
+                '<strong>' + flat.street + '</strong><br>' +
+                'Nájmemné: ' + flat.rent +' Kč<br>' +
+                'Plocha: 20m2<br>' +
+                '<a href="/praguehacks/detail?id=1" title="detail">Zobrazit detail nabídky</a>' +
+                '</p>'
+            );
+            marker.addTo(map);
+        });
+    });
+
+
+/*
     flats = [
         {
             "street": "K novým domkům",
@@ -87,12 +109,15 @@
 
         marker = L.marker([flat.lat, flat.lng]);
         marker.bindPopup(
+            '<p style="font-size: 1.5em">' +
             '<strong>' + flat.street + '</strong><br>' +
-            'Cena: ' + flat.rent +' Kč<br>' +
-            'Rozměry: 20m2<br>' +
-            '<a href="/praguehacks/detail?id=1" title="Ahoj">Klikni na mě</a>');
+            'Nájmemné: ' + flat.rent +' Kč<br>' +
+            'Plocha: 20m2<br>' +
+            '<a href="/praguehacks/detail?id=1" title="detail">Zobrazit detail nabídky</a>' +
+            '</p>'
+        );
         marker.addTo(map);
     });
 
-
+*/
 </script>
