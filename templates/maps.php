@@ -41,7 +41,7 @@
     map.on('locationerror', onLocationError);
     map.locate({setView: true, maxZoom: 14});
 
-    $.getJSON( "/praguehacks/data/flats-geo.json", function( data ) {
+    $.getJSON( "<?= $baseUrl ?>/data/flats-geo.json", function( data ) {
         flats = data.features;
 
         flats.forEach(function (flat, key) {

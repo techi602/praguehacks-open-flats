@@ -54,6 +54,6 @@ $app->get('/detail', function () use ($app) {
     ));
 });
 
-$app->view()->set('baseUrl', '/praguehacks');
+$app->view()->set('baseUrl', '');
 $app->run();
 
