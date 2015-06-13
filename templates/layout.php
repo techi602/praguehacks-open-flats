@@ -71,17 +71,17 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
+                <?php if (false): ?>
                 <li<?php echo $page == 'home' ? ' class="active"' : '' ?>>
                     <a href="<?= $baseUrl ?>/"><span class="glyphicon glyphicon-home"></span> Home</a>
                 </li>
-                <?php if (false): ?>
                 <li<?php echo $page == 'google' ? ' class="active"' : '' ?>>
                     <a href="<?= $baseUrl ?>/google"><span class="glyphicon glyphicon-wrench"></span> Google maps</a>
                 </li>
                 <?php endif ?>
 
                 <li<?php echo $page == 'maps' ? ' class="active"' : '' ?>>
-                    <a href="<?= $baseUrl ?>/maps"><span class="glyphicon glyphicon-map-marker"></span> Leaflet</a>
+                    <a href="<?= $baseUrl ?>/maps"><span class="glyphicon glyphicon-map-marker"></span> Mapy</a>
                 </li>
 
                 <li>

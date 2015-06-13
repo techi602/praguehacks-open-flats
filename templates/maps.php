@@ -47,77 +47,55 @@
             marker.bindPopup(
                 '<p style="font-size: 1.5em">' +
                 '<strong>' + flat.street + '</strong><br>' +
-                'Nájmemné: ' + flat.rent +' Kč<br>' +
+                'Nájemné: ' + flat.rent +' Kč<br>' +
                 'Plocha: 20m2<br>' +
-                '<a href="/praguehacks/detail?id=1" title="detail">Zobrazit detail nabídky</a>' +
+                '<a href="#"' +
+                'data-toggle="modal"' +
+                'data-target="#modal-flat" ' +
+                'data-title="' + flat.street + '" ' +
+                'data-rent="' + flat.rent + '" ' +
+                'data-area="' + 20 + '" ' +
+                '">Zobrazit detail nabídky</a>' +
                 '</p>'
             );
             marker.addTo(map);
         });
     });
 
+    $(function() {
+        $('#modal-flat').on('show.bs.modal', function (e) {
+            xdata = $(this).data();
+            options = xdata['bs.modal'].options;
 
-/*
-    flats = [
-        {
-            "street": "K novým domkům",
-            "num_desc": "131",
-            "num_orient": null,
-            "num_flat": "1",
-            "area": "79.7",
-            "status": "volný",
-            "rent_area": null,
-            "rent": "3000",
-            "hire_from": null,
-            "hire_to": null,
-            "admin": "ACTON s.r.o.",
-            "city_district": "Praha - Lahovice",
-            "note": null,
-            "source": "ACTON-PPS - byty",
-            "source_id": "78",
-            "rate": null,
-            "rent_base": null,
-            "equipment": null,
-            "lat": 50.063882,
-            "lng": 14.444922
-        },
-        {
-            "street": "K novým domkům 2",
-            "num_desc": "131",
-            "num_orient": null,
-            "num_flat": "1",
-            "area": "79.7",
-            "status": "volný",
-            "rent_area": null,
-            "rent": "3000",
-            "hire_from": null,
-            "hire_to": null,
-            "admin": "ACTON s.r.o.",
-            "city_district": "Praha - Lahovice",
-            "note": null,
-            "source": "ACTON-PPS - byty",
-            "source_id": "78",
-            "rate": null,
-            "rent_base": null,
-            "equipment": null,
-            "lat": 50.053882,
-            "lng": 14.434922
-        }
-    ];
+            $('#myModalLabel').html(options.title);
+            $('#flat-rent').html(options.rent);
+            $('#flat-area').html(options.area);
+        });
 
-    flats.forEach(function (flat, key) {
-
-        marker = L.marker([flat.lat, flat.lng]);
-        marker.bindPopup(
-            '<p style="font-size: 1.5em">' +
-            '<strong>' + flat.street + '</strong><br>' +
-            'Nájmemné: ' + flat.rent +' Kč<br>' +
-            'Plocha: 20m2<br>' +
-            '<a href="/praguehacks/detail?id=1" title="detail">Zobrazit detail nabídky</a>' +
-            '</p>'
-        );
-        marker.addTo(map);
+        $("#modal-flat").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
     });
 
-*/
+
 </script>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-flat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Nájemné: <span id="flat-rent"></span> Kč <br>Plocha: <span id="flat-area"></span> m2 <br>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
