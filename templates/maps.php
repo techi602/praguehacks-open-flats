@@ -41,20 +41,30 @@
     map.on('locationerror', onLocationError);
     map.locate({setView: true, maxZoom: 14});
 
-    $.getJSON( "/praguehacks/data/flats.json", function( flats ) {
+    $.getJSON( "/praguehacks/data/flats-geo.json", function( data ) {
+        flats = data.features;
+
         flats.forEach(function (flat, key) {
-            marker = L.marker([flat.lat, flat.lng]);
+            marker = L.marker([flat.geometry.coordinates[1], flat.geometry.coordinates[0]]);
+            var street = flat.properties.street + ' ' + flat.properties.num_desc;
+            if (flat.num_orient){
+                street += '/' + flat.properties.num_orient;
+            }
+
             marker.bindPopup(
                 '<p style="font-size: 1.5em">' +
-                '<strong>' + flat.street + '</strong><br>' +
-                'Nájemné: ' + flat.rent +' Kč<br>' +
-                'Plocha: 20m2<br>' +
+                '<strong>' + street + '</strong><br>' +
+                'Nájemné: ' + flat.properties.rent +' Kč<br>' +
+                'Plocha: ' + flat.properties.area + ' m2<br>' +
+                'Stav: ' + flat.properties.status + '<br>' +
                 '<a href="#"' +
                 'data-toggle="modal"' +
                 'data-target="#modal-flat" ' +
-                'data-title="' + flat.street + '" ' +
-                'data-rent="' + flat.rent + '" ' +
-                'data-area="' + 20 + '" ' +
+                'data-title="' + street + '" ' +
+                'data-rent="' + flat.properties.rent + '" ' +
+                'data-area="' + flat.properties.area + '" ' +
+                'data-status="' + flat.properties.status + '" ' +
+                'data-district="' + flat.properties.city_district + '" ' +
                 '">Zobrazit detail nabídky</a>' +
                 '</p>'
             );
@@ -70,6 +80,11 @@
             $('#myModalLabel').html(options.title);
             $('#flat-rent').html(options.rent);
             $('#flat-area').html(options.area);
+            $('#flat-status').html(options.status);
+
+            var mail = 'Libuse.Bartunkova@praha.eu';
+            var mailto = 'mailto:' + mail + '?Subject=Prosba o více informací k bytu na adrese ' + options.title + '&body=Dobrý den,\n prosím o více informací o dostupnosti bytu na adrese ' + options.title + '.\n\nPředem Děkuji\nS pozdravem';
+            $('#mail-link').attr('href', mailto);
         });
 
         $("#modal-flat").on('hidden.bs.modal', function () {
@@ -86,15 +101,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel" style="font-size: 2em">Modal title</h4>
             </div>
             <div class="modal-body">
-                <p>
-                    Nájemné: <span id="flat-rent"></span> Kč <br>Plocha: <span id="flat-area"></span> m2 <br>
+                <p style="font-size: 1.5em">
+                    Nájemné: <span id="flat-rent"></span> Kč <br>
+                    Plocha: <span id="flat-area"></span> m2 <br>
+                    Stav: <span id="flat-status"></span> <br>
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="tel:+420236002435" class="btn btn-primary" id="phone-link">
+                    <span class="glyphicon glyphicon-phone-alt"></span> Telefon +420 236 00 2435
+                </a>
+                <a href="#" class="btn btn-success" id="mail-link">
+                    <span class="glyphicon glyphicon-envelope"></span> E-mail
+                </a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
             </div>
         </div>
     </div>

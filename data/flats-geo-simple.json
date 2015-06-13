@@ -1,0 +1,339 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "street": "Květnová",
+        "num_desc": "38",
+        "num_orient": "56",
+        "num_flat": "1",
+        "area": "127.07",
+        "status": "obsazený",
+        "rent_area": "44.13",
+        "rent": "0",
+        "hire_from": ".  .",
+        "hire_to": null,
+        "admin": "ACTON s.r.o.",
+        "city_district": "Praha 8 - Ďáblice",
+        "note": null,
+        "source": "ACTON-PPS - byty",
+        "source_id": "38",
+        "rate": "44.13",
+        "rent_base": null,
+        "equipment": null,
+        "char_orient": null,
+        "coord_y": 738137.89000000001,
+        "coord_x": 1037547.92
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.475580496582635,
+          50.141855927976486
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "street": "K Lahovské",
+        "num_desc": "40",
+        "num_orient": null,
+        "num_flat": "1",
+        "area": "93.3",
+        "status": "volný",
+        "rent_area": null,
+        "rent": "0",
+        "hire_from": null,
+        "hire_to": null,
+        "admin": "ACTON s.r.o.",
+        "city_district": "Praha 5 - Lochkov",
+        "note": null,
+        "source": "ACTON-PPS - byty",
+        "source_id": "41",
+        "rate": null,
+        "rent_base": null,
+        "equipment": null,
+        "char_orient": null,
+        "coord_y": 748764.34999999998,
+        "coord_x": 1051719.21
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.355519441485672,
+          50.002597775049495
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "street": "K Lahovské",
+        "num_desc": "40",
+        "num_orient": null,
+        "num_flat": "2",
+        "area": "52.7",
+        "status": "volný",
+        "rent_area": null,
+        "rent": "0",
+        "hire_from": null,
+        "hire_to": null,
+        "admin": "ACTON s.r.o.",
+        "city_district": "Praha 5 - Lochkov",
+        "note": null,
+        "source": "ACTON-PPS - byty",
+        "source_id": "42",
+        "rate": null,
+        "rent_base": null,
+        "equipment": null,
+        "char_orient": null,
+        "coord_y": 748764.34999999998,
+        "coord_x": 1051719.21
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.355519441485672,
+          50.002597775049495
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "street": "Polabská",
+        "num_desc": "47",
+        "num_orient": "51",
+        "num_flat": "1",
+        "area": "85.1",
+        "status": "obsazený",
+        "rent_area": "69.31",
+        "rent": "0",
+        "hire_from": ".  .",
+        "hire_to": null,
+        "admin": "ACTON s.r.o.",
+        "city_district": "Praha 9 - Miškovice",
+        "note": null,
+        "source": "ACTON-PPS - byty",
+        "source_id": "45",
+        "rate": "89.57",
+        "rent_base": null,
+        "equipment": null,
+        "char_orient": null,
+        "coord_y": 733168,
+        "coord_x": 1036363
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.54224337398397,
+          50.158451485425687
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "street": "Polabská",
+        "num_desc": "47",
+        "num_orient": "51",
+        "num_flat": "2",
+        "area": "85.1",
+        "status": "obsazený",
+        "rent_area": "72.77",
+        "rent": "0",
+        "hire_from": ".  .",
+        "hire_to": null,
+        "admin": "ACTON s.r.o.",
+        "city_district": "Praha 9 - Miškovice",
+        "note": null,
+        "source": "ACTON-PPS - byty",
+        "source_id": "46",
+        "rate": "89.57",
+        "rent_base": null,
+        "equipment": null,
+        "char_orient": null,
+        "coord_y": 733168,
+        "coord_x": 1036363
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.54224337398397,
+          50.158451485425687
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "street": "Polabská",
+        "num_desc": "47",
+        "num_orient": "51",
+        "num_flat": "3",
+        "area": "85.1",
+        "status": "obsazený",
+        "rent_area": "69.31",
+        "rent": "0",
+        "hire_from": ".  .",
+        "hire_to": null,
+        "admin": "ACTON s.r.o.",
+        "city_district": "Praha 9 - Miškovice",
+        "note": null,
+        "source": "ACTON-PPS - byty",
+        "source_id": "47",
+        "rate": "89.57",
+        "rent_base": null,
+        "equipment": null,
+        "char_orient": null,
+        "coord_y": 733168,
+        "coord_x": 1036363
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.54224337398397,
+          50.158451485425687
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "street": "Polabská",
+        "num_desc": "47",
+        "num_orient": "51",
+        "num_flat": "4",
+        "area": "85.1",
+        "status": "obsazený",
+        "rent_area": "72.77",
+        "rent": "0",
+        "hire_from": ".  .",
+        "hire_to": null,
+        "admin": "ACTON s.r.o.",
+        "city_district": "Praha 9 - Miškovice",
+        "note": null,
+        "source": "ACTON-PPS - byty",
+        "source_id": "48",
+        "rate": "89.57",
+        "rent_base": null,
+        "equipment": null,
+        "char_orient": null,
+        "coord_y": 733168,
+        "coord_x": 1036363
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.54224337398397,
+          50.158451485425687
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "street": "Štychova",
+        "num_desc": "54",
+        "num_orient": "40",
+        "num_flat": "1",
+        "area": "69.7",
+        "status": "obsazený",
+        "rent_area": "85.22",
+        "rent": "0",
+        "hire_from": ".  .",
+        "hire_to": null,
+        "admin": "ACTON s.r.o.",
+        "city_district": "Praha - Křeslice",
+        "note": null,
+        "source": "ACTON-PPS - byty",
+        "source_id": "52",
+        "rate": "117.4",
+        "rent_base": null,
+        "equipment": null,
+        "char_orient": null,
+        "coord_y": 733484.37,
+        "coord_x": 1051474.45
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.566280927344854,
+          50.023435533820411
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "street": "Na hlavní",
+        "num_desc": "82",
+        "num_orient": "12",
+        "num_flat": "1",
+        "area": "101.8",
+        "status": "obsazený",
+        "rent_area": "62.38",
+        "rent": "0",
+        "hire_from": ".  .",
+        "hire_to": null,
+        "admin": "ACTON s.r.o.",
+        "city_district": "Praha  - Březiněves",
+        "note": null,
+        "source": "ACTON-PPS - byty",
+        "source_id": "55",
+        "rate": "89.57",
+        "rent_base": null,
+        "equipment": null,
+        "char_orient": null,
+        "coord_y": 737214.54000000004,
+        "coord_x": 1035186.67
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.483903293682257,
+          50.16401532217963
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "street": "Na hlavní",
+        "num_desc": "82",
+        "num_orient": "12",
+        "num_flat": "2",
+        "area": "87.9",
+        "status": "obsazený",
+        "rent_area": "69.38",
+        "rent": "0",
+        "hire_from": ".  .",
+        "hire_to": null,
+        "admin": "ACTON s.r.o.",
+        "city_district": "Praha  - Březiněves",
+        "note": null,
+        "source": "ACTON-PPS - byty",
+        "source_id": "56",
+        "rate": "89.57",
+        "rent_base": null,
+        "equipment": null,
+        "char_orient": null,
+        "coord_y": 737214.54000000004,
+        "coord_x": 1035186.67
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.483903293682257,
+          50.16401532217963
+        ]
+      }
+    }
+  ]
+}
