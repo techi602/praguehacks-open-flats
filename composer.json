@@ -1,0 +1,7 @@
+{
+    "require": {
+        "slim/slim": "^2.6",
+        "petebrowne/slim-layout-view": "^0.3.0",
+        "zendframework/zend-http": "^2.5"
+    }
+}

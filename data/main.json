@@ -1,0 +1,30 @@
+{
+  "reference": [
+    {
+      "text": "Děkuji společnosti BD interier za montáž kuchyně snů do mého nového bytu.",
+      "author": "MUDr. Karolína Nováková"
+    },
+    {
+      "text": "Jsem se svou kuchyní a přítelem hrozně moc štastná.",
+      "author": "Ing. Michaela Boukalová"
+    }
+  ],
+  "carousel": [
+    {
+      "img": "/img/banner1.jpg",
+      "title": "Banner 1"
+    },
+    {
+      "img": "/img/banner2.jpg",
+      "title": "Banner 2"
+    },
+    {
+      "img": "/img/banner3.jpg",
+      "title": "Banner 3"
+    },
+    {
+      "img": "/img/banner4.jpg",
+      "title": "Banner 4"
+    }
+  ]
+}
