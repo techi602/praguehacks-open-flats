@@ -75,12 +75,21 @@ function loadGeoData()
 
     var url = window.DATA_URL;
 
-    url += '?area=' + $('#area').val();
-    url += '&price=' + $('#price').val();
-    url += '&status=' + $('#status').is(":checked");
-    url += '&lat=' + latLng.lat;
-    url += '&lng=' + latLng.lng;
+    params = [];
+    if ($('#area').length) {
+        params.push('area=' + $('#area').val());
+    }
+    if ($('#price').length) {
+        params.push('price=' + $('#price').val());
+    }
+    if ($('#status').length) {
+        params.push('status=' + $('#status').is(":checked"));
+    }
+    params.push('lat=' + latLng.lat);
+    params.push('lnt=' + latLng.lng);
+    params.push('zoom=' + map.getZoom());
 
+    url += '?' + params.join('&');
     console.log(url);
 
     $.ajax({
@@ -116,58 +125,3 @@ function onDragEnd(e) {
     setTimeout(loadGeoData, 300);
 }
 
-
-$(function() {
-    $('#modal-flat').on('show.bs.modal', function (e) {
-        xdata = $(this).data();
-        options = xdata['bs.modal'].options;
-
-        $('#myModalLabel').html(options.title);
-        $('#flat-rent').html(options.rent);
-        $('#flat-area').html(options.area);
-        $('#flat-status').html(options.status);
-
-        var mail = 'Libuse.Bartunkova@praha.eu';
-        var mailto = 'mailto:' + mail + '?Subject=Prosba o více informací k bytu na adrese ' + options.title + '&body=Dobrý den,\n prosím o více informací o dostupnosti bytu na adrese ' + options.title + '.\n\nPředem Děkuji\nS pozdravem';
-        $('#mail-link').attr('href', mailto);
-    });
-
-    $("#modal-flat").on('hidden.bs.modal', function () {
-        $(this).data('bs.modal', null);
-    });
-
-    $("#price").slider({});
-    $("#area").slider({});
-
-    $("#price").on("slide", function(slideEvt) {
-        var val = slideEvt.value;
-        $('#price-range').html(val[0] + ' - ' + val[1]);
-        setTimeout(loadGeoData, 800);
-    });
-
-    $("#area").on("slide", function(slideEvt) {
-        var val = slideEvt.value;
-        $('#area-range').html(val[0] + ' - ' + val[1]);
-        setTimeout(loadGeoData, 800);
-    });
-
-    map = L.map('map', {
-        center: [50.063882, 14.444922],
-        zoom: 12
-    });
-
-    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        id: 'examples.map-i875mjb7'
-    }).addTo(map);
-
-    map.on('locationfound', onLocationFound);
-    map.on('locationerror', onLocationError);
-    map.on('dragend', onDragEnd);
-    map.locate({setView: true, maxZoom: 14});
-
-    loadGeoData();
-});

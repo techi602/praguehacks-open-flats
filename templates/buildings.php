@@ -9,6 +9,17 @@
 <div id="map"></div>
 
 <script>
+    window.DATA_URL = "<?= $dataUrl ?>";
+    //"/praguehacks/data/flats-geo-simple.json"
+
+
+
+    var cluster = L.markerClusterGroup();
+
+    var map;
+
+    var markers = [];
+
     var APP = {
         // Definition of the Křovák projection
         // EPSG:102067 instead of EPSG:5514 needs to be used with IPR's WMS.
@@ -24,6 +35,10 @@
                     4.00048828125, 2.000244140625, 1.0001220703125, 0.50006103515625,
                     0.250030517578125, 0.1250152587890625, 0.06250762939453125]}),
         main: function () {
+            // Definition of the WGS 84 / Pseudo-Mercator
+            proj4.defs("EPSG:3857","+proj=merc +a=6378137 +b=6378137 "
+            + "+lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 "
+            + "+units=m +nadgrids=@null +wktext  +no_defs");
             var layerOptions = {
                 format: "image/png",
                 transparent: true,
@@ -41,14 +56,58 @@
                 "http://wgp.urm.cz/ArcGIS/services/SED/Majetek_HMP_budovy/MapServer/WMSServer",
                 layerOptions
             );
+            // Layer with Prague-owned flats for rent
+            /*
+             GeoJSON feature collection needs to specify its coordinate system, like this:
+             "crs": {
+             "type": "name",
+             "properties": {
+             "name": "urn:ogc:def:crs:EPSG::3857"
+             }
+             }
+             */
+            var pragueFlats = L.geoJson();
 
             var center = [50.093743, 14.446707]; // In Prague
-            var map = L.map("map",
-                {layers: [pragueMap, pragueProperties],
+            map = L.map("map",
+                {layers: [pragueMap, pragueProperties, pragueFlats],
                     crs: APP.crs}
             ).setView(center, 13);
+
+            map.on('dragend', onDragEnd);
+            loadGeoData();
+            /*
+            $.getJSON(window.DATA_URL, function (data) {
+                pragueFlats.addData(data);
+            });
+            */
         }
     };
 
-    document.addEventListener("DOMContentLoaded", APP.main);
+
+    $(function() {
+        $('#modal-flat').on('show.bs.modal', function (e) {
+            xdata = $(this).data();
+            options = xdata['bs.modal'].options;
+
+            $('#myModalLabel').html(options.title);
+            $('#flat-rent').html(options.rent);
+            $('#flat-area').html(options.area);
+            $('#flat-status').html(options.status);
+
+            var mail = 'Libuse.Bartunkova@praha.eu';
+            var mailto = 'mailto:' + mail + '?Subject=Prosba o více informací k bytu na adrese ' + options.title + '&body=Dobrý den,\n prosím o více informací o dostupnosti bytu na adrese ' + options.title + '.\n\nPředem Děkuji\nS pozdravem';
+            $('#mail-link').attr('href', mailto);
+        });
+
+        $("#modal-flat").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
+
+    });
+
+        document.addEventListener("DOMContentLoaded", APP.main);
 </script>
+
+
+<?= include 'modal.php' ?>

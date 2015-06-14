@@ -46,48 +46,62 @@
 <div id="map"></div>
 <script>
     window.DATA_URL = "<?= $dataUrl ?>";
+
+    $(function() {
+        $('#modal-flat').on('show.bs.modal', function (e) {
+            xdata = $(this).data();
+            options = xdata['bs.modal'].options;
+
+            $('#myModalLabel').html(options.title);
+            $('#flat-rent').html(options.rent);
+            $('#flat-area').html(options.area);
+            $('#flat-status').html(options.status);
+
+            var mail = 'Libuse.Bartunkova@praha.eu';
+            var mailto = 'mailto:' + mail + '?Subject=Prosba o více informací k bytu na adrese ' + options.title + '&body=Dobrý den,\n prosím o více informací o dostupnosti bytu na adrese ' + options.title + '.\n\nPředem Děkuji\nS pozdravem';
+            $('#mail-link').attr('href', mailto);
+        });
+
+        $("#modal-flat").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
+
+        $("#price").slider({});
+        $("#area").slider({});
+
+        $("#price").on("slide", function(slideEvt) {
+            var val = slideEvt.value;
+            $('#price-range').html(val[0] + ' - ' + val[1]);
+            setTimeout(loadGeoData, 800);
+        });
+
+        $("#area").on("slide", function(slideEvt) {
+            var val = slideEvt.value;
+            $('#area-range').html(val[0] + ' - ' + val[1]);
+            setTimeout(loadGeoData, 800);
+        });
+
+        map = L.map('map', {
+            center: [50.063882, 14.444922],
+            zoom: 12
+        });
+
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'examples.map-i875mjb7'
+        }).addTo(map);
+
+        map.on('locationfound', onLocationFound);
+        map.on('locationerror', onLocationError);
+        map.on('dragend', onDragEnd);
+        map.locate({setView: true, maxZoom: 14});
+
+        loadGeoData();
+    });
+
 </script>
 
-<!-- Modal -->
-<div class="modal fade" id="modal-flat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" style="font-size: 2em">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p style="font-size: 1.5em">
-                                Nájemné: <span id="flat-rent"></span> <br>
-                                Plocha: <span id="flat-area"></span> m2 <br>
-                                Stav: <span id="flat-status"></span> <br>
-                            </p>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="#" style="font-size: 4em">
-                                <span class="glyphicon glyphicon-thumbs-up"></span><!--
-                            --></a>
-
-                            &nbsp;&nbsp;
-
-                            <a href="#" style="font-size: 4em">
-                                <span class="glyphicon glyphicon-thumbs-down"></span>
-                            </a>
-                        </div>
-                    </div>
-
-            </div>
-            <div class="modal-footer">
-                <a href="tel:+420236002435" class="btn btn-primary" id="phone-link">
-                    <span class="glyphicon glyphicon-phone-alt"></span> Telefon +420 236 00 2435
-                </a>
-                <a href="#" class="btn btn-success" id="mail-link">
-                    <span class="glyphicon glyphicon-envelope"></span> E-mail
-                </a>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
-            </div>
-        </div>
-    </div>
-</div>
+<?= include 'modal.php' ?>

@@ -61,6 +61,7 @@ $app->get('/buildings', function () use ($app, $baseUrl) {
         'page' => 'buildings',
         'title' => 'Budovy Magistrátu hlavního města Prahy',
         'js' => array(
+            $baseUrl . '/assets/maps.js',
             $baseUrl . '/assets/proj4.js',
             $baseUrl . '/assets/proj4leaflet.js',
         ),
