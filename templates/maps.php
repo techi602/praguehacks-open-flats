@@ -4,44 +4,7 @@
         height: 100%;
     }
 
-    .slider-horizontal {
-        width: 70% !important;
-    }
-
 </style>
-
-    <div class="container">
-        <fieldset>
-            <legend>Filtry</legend>
-
-        <div class="row">
-            <div class="col-md-2">
-                Měsíční nájemné (Kč):
-            </div>
-            <div class="col-md-4">
-                <input id="price" type="text" class="span2" value="" data-slider-min="2000" data-slider-max="20000" data-slider-step="500" data-slider-value="[1000,10000]">
-                <span id="price-range" class="text-nowrap"></span>
-            </div>
-            <div class="col-md-2">
-                Plocha (m2):
-            </div>
-            <div class="col-md-4">
-                <input id="area" type="text" class="span2" value="" data-slider-min="10" data-slider-max="300" data-slider-step="5" data-slider-value="[20,100]">
-                <span id="area-range" class="text-nowrap"></span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <label>
-                    <input type="checkbox" value="1" name="status" id="status"> Pouze volné byty
-                </label>
-            </div>
-        </div>
-        </fieldset>
-
-    </div>
-
-<br>
 
 <div id="map"></div>
 <script>

@@ -100,8 +100,15 @@
                 </li>
 
                 <li>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-bookmark"></span>
+                    <a href="#" onclick="$('#filter-form').toggle()">
+                        <span class="glyphicon glyphicon-cog"></span>
+                        Filtr
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#modal-fav">
+                        <span class="glyphicon glyphicon-thumbs-up"></span>
                         Oblíbené
                     </a>
                 </li>
@@ -125,7 +132,101 @@
     </div>
 </div>
 
+<div id="filter-form" style="display: none">
+<div class="container">
+    <fieldset>
+        <legend>Filtry</legend>
+
+        <div class="row">
+            <div class="col-md-2">
+                Měsíční nájemné (Kč):
+            </div>
+            <div class="col-md-4">
+                <input id="price" type="text" class="span2" value="" data-slider-min="2000" data-slider-max="20000" data-slider-step="500" data-slider-value="[1000,10000]">
+                <span id="price-range" class="text-nowrap"></span>
+            </div>
+            <div class="col-md-2">
+                Plocha (m2):
+            </div>
+            <div class="col-md-4">
+                <input id="area" type="text" class="span2" value="" data-slider-min="10" data-slider-max="300" data-slider-step="5" data-slider-value="[20,100]">
+                <span id="area-range" class="text-nowrap"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>
+                    <input type="checkbox" value="1" name="status" id="status"> Pouze volné byty
+                </label>
+            </div>
+        </div>
+    </fieldset>
+
+</div>
+
+<br>
+
+</div>
+
+
 <?= $yield ?>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-fav" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="font-size: 2em">Oblíbené</h4>
+            </div>
+            <div class="modal-body">
+
+                <ul id="fav-list">
+
+                </ul>
+
+            </div>
+            <div class="modal-footer">
+                <a href="tel:+420236002435" class="btn btn-primary" id="phone-link">
+                    <span class="glyphicon glyphicon-phone-alt"></span> Telefon +420 236 00 2435
+                </a>
+                <a href="#" class="btn btn-success" id="mail-link">
+                    <span class="glyphicon glyphicon-envelope"></span> E-mail
+                </a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(function() {
+        $('#modal-fav').on('show.bs.modal', function (e) {
+            xdata = $(this).data();
+            options = xdata['bs.modal'].options;
+
+            var list = [];
+
+            // Loop over all stored values
+            store.forEach(function(key, val) {
+                if (val == 1 && key.substr(0, 5) == 'like-') {
+                    var address = key.substr(5);
+                    list.push('<li>' + address + '</li>');
+                }
+            });
+
+            $('#fav-list').html(list.join("\n"));
+        });
+
+        $("#modal-flat").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
+    });
+</script>
+
+
 
 </body>
 </html>
