@@ -57,6 +57,11 @@
 
 
     </script>
+    <?php if (!empty($js)): ?>
+        <?php foreach ($js as $script): ?>
+            <script src="<?= $script ?>"></script>
+        <?php endforeach ?>
+    <?php endif ?>
 
 </head>
 <body>
@@ -83,6 +88,10 @@
 
                 <li<?php echo $page == 'maps' ? ' class="active"' : '' ?>>
                     <a href="<?= $baseUrl ?>/maps"><span class="glyphicon glyphicon-map-marker"></span> Mapy</a>
+                </li>
+
+                <li<?php echo $page == 'buildings' ? ' class="active"' : '' ?>>
+                    <a href="<?= $baseUrl ?>/buildings"><span class="glyphicon glyphicon glyphicon-piggy-bank"></span> Budovy</a>
                 </li>
 
                 <li>

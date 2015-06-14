@@ -1,13 +1,23 @@
 <?php
 require 'vendor/autoload.php';
 
+$dev = in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'));
+
 // Prepare app
 $app = new \Slim\Slim(array(
     'templates.path' => 'templates',
-    'debug' => in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1')),
+    'debug' => $dev,
     'view' => '\Slim\LayoutView',
     'layout' => 'layout.php',
 ));
+
+if ($dev) {
+    $dataUrl = '/praguehacks/data/flats-geo.json';
+    $baseUrl = '/praguehacks';
+} else {
+    $dataUrl = 'http://praguehacks-open-flats-data.mybluemix.net/flats';
+    $baseUrl = '';
+}
 
 $app->get('/', function () use ($app) {
     $years = (int) date('Y') - 2000;
@@ -44,6 +54,16 @@ $app->get('/google', function () use ($app) {
     ));
 });
 
+$app->get('/buildings', function () use ($app, $baseUrl) {
+    $app->render('buildings.php', array(
+        'page' => 'buildings',
+        'title' => 'Budovy Magistrátu hlavního města Prahy',
+        'js' => array(
+            $baseUrl . '/assets/proj4.js',
+            $baseUrl . '/assets/proj4leaflet.js',
+        ),
+    ));
+});
 
 $app->get('/detail', function () use ($app) {
     $app->render('detail.php', array(
@@ -54,13 +74,6 @@ $app->get('/detail', function () use ($app) {
     ));
 });
 
-
-//$dataUrl = '/praguehacks/data/flats-geo.json';
-$dataUrl = 'http://praguehacks-open-flats-data.mybluemix.net/flats';
-//$baseUrl = '/praguehacks';
-$baseUrl = '';
-
 $app->view()->set('dataUrl', $dataUrl);
 $app->view()->set('baseUrl', $baseUrl);
 $app->run();
-
