@@ -44,7 +44,8 @@
                 transparent: true,
                 opacity: 1,
                 layers: ["0"],
-                crs: APP.crs
+                crs: APP.crs,
+                attribution: 'Map data &copy; <a href="http://www.geoportalpraha.cz/">Institut plánování a rozvoje hlavního města Prahy</a>'
             };
             // Map tiles of Prague
             var pragueMap = L.tileLayer.wms(
