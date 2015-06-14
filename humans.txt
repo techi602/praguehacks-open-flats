@@ -16,7 +16,11 @@
 	From: Prague, Czech republic
 
 	Team leader: Radek Švarz
-	From: Prague, Czech republics
+	From: Prague, Czech republic
+
+	Open data mentor: Ondřej Profant
+	From: Prague, Czech republic
+	Twitter: @ondrej_profant
 
 /* SITE */
 	Last update:2015/06/14
