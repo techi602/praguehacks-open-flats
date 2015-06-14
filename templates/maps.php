@@ -81,6 +81,9 @@
     function refreshMarkers(data)
     {
         deletePreviousMarkers();
+
+        map.removeLayer(cluster);
+
         flats = data.features;
 
         flats.forEach(function (flat, key) {
