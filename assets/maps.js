@@ -30,7 +30,7 @@ function refreshMarkers(data)
         if (rent == 0 || rent == null) {
             rent = 'neupřesněno';
         } else {
-            rent += ' Kč';
+            rent = Math.round(rent) + ' Kč';
         }
 
         var status = flat.properties.status;
@@ -44,7 +44,7 @@ function refreshMarkers(data)
             'Nájemné: ' + rent + '<br>' +
             'Plocha: ' + flat.properties.area + ' m2<br>' +
             'Stav: ' + status + '<br>' +
-            '<a href="#"' +
+            '<a class="btn btn-primary text-center" style="font-weight: bold;color:white; width: 100%" href="#"' +
             'data-toggle="modal"' +
             'data-target="#modal-flat" ' +
             'data-title="' + street + '" ' +
@@ -52,7 +52,7 @@ function refreshMarkers(data)
             'data-area="' + flat.properties.area + '" ' +
             'data-status="' + status + '" ' +
             'data-district="' + flat.properties.city_district + '" ' +
-            '">Zobrazit detail nabídky</a>' +
+            '">Detail</a>' +
             '</p>'
         );
         //marker.addTo(map);
@@ -124,4 +124,3 @@ function onLocationError(e) {
 function onDragEnd(e) {
     setTimeout(loadGeoData, 300);
 }
-
