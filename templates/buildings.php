@@ -84,28 +84,6 @@
         }
     };
 
-
-    $(function() {
-        $('#modal-flat').on('show.bs.modal', function (e) {
-            xdata = $(this).data();
-            options = xdata['bs.modal'].options;
-
-            $('#myModalLabel').html(options.title);
-            $('#flat-rent').html(options.rent);
-            $('#flat-area').html(options.area);
-            $('#flat-status').html(options.status);
-
-            var mail = 'Libuse.Bartunkova@praha.eu';
-            var mailto = 'mailto:' + mail + '?Subject=Prosba o více informací k bytu na adrese ' + options.title + '&body=Dobrý den,\n prosím o více informací o dostupnosti bytu na adrese ' + options.title + '.\n\nPředem Děkuji\nS pozdravem';
-            $('#mail-link').attr('href', mailto);
-        });
-
-        $("#modal-flat").on('hidden.bs.modal', function () {
-            $(this).data('bs.modal', null);
-        });
-
-    });
-
         document.addEventListener("DOMContentLoaded", APP.main);
 </script>
 
