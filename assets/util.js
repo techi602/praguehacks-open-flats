@@ -30,3 +30,26 @@ function toggleHand(change)
     var css = states[status];
     $('#hand').attr('class', css);
 }
+
+var defaultDelay = 600;
+
+function initForm()
+{
+    $("#price").slider({});
+    $("#area").slider({});
+    $('#status').click(function (e) {
+        setTimeout(loadGeoData, defaultDelay);
+    });
+
+    $("#price").on("slide", function(slideEvt) {
+        var val = slideEvt.value;
+        $('#price-range').html(val[0] + ' - ' + val[1]);
+        setTimeout(loadGeoData, defaultDelay);
+    });
+
+    $("#area").on("slide", function(slideEvt) {
+        var val = slideEvt.value;
+        $('#area-range').html(val[0] + ' - ' + val[1]);
+        setTimeout(loadGeoData, defaultDelay);
+    });
+}

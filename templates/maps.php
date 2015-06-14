@@ -11,20 +11,8 @@
     window.DATA_URL = "<?= $dataUrl ?>";
 
     $(function() {
-        $("#price").slider({});
-        $("#area").slider({});
 
-        $("#price").on("slide", function(slideEvt) {
-            var val = slideEvt.value;
-            $('#price-range').html(val[0] + ' - ' + val[1]);
-            setTimeout(loadGeoData, 800);
-        });
-
-        $("#area").on("slide", function(slideEvt) {
-            var val = slideEvt.value;
-            $('#area-range').html(val[0] + ' - ' + val[1]);
-            setTimeout(loadGeoData, 800);
-        });
+        initForm();
 
         map = L.map('map', {
             center: [50.063882, 14.444922],
