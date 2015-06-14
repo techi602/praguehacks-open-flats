@@ -86,7 +86,7 @@ function loadGeoData()
         params.push('status=' + $('#status').is(":checked"));
     }
     params.push('lat=' + latLng.lat);
-    params.push('lnt=' + latLng.lng);
+    params.push('lng=' + latLng.lng);
     params.push('zoom=' + map.getZoom());
 
     url += '?' + params.join('&');
