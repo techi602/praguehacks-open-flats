@@ -69,10 +69,12 @@
 
     var markers = [];
 
+    var cluster = L.markerClusterGroup();
+
     function deletePreviousMarkers()
     {
         for (i = 0; i < markers.length; i++) {
-            map.removeLayer(markers[i]);
+            cluster.removeLayer(markers[i]);
         }
     }
 
@@ -105,9 +107,12 @@
                 '">Zobrazit detail nabídky</a>' +
                 '</p>'
             );
-            marker.addTo(map);
+            //marker.addTo(map);
             markers.push(marker);
+            cluster.addLayer(marker);
         });
+
+        map.addLayer(cluster);
     }
 
     function loadGeoData()
