@@ -1,0 +1,26 @@
+/* TEAM */
+	Frontend developer: Michal Vrchota
+	Site: http://www.techi.cz
+	Twitter: @techi602
+	From: Prague, Czech republic
+
+	Backend developer: Ondřej Ešler
+	From: Pilsen, Czech republic
+	Twitter: @ondrejesler
+
+	Map specialist: Jindřich Mynarz
+	From: Prague, Czech republic
+	Twitter: @jindrichmynarz
+
+	Data analyst: Tereza Praksova
+	From: Prague, Czech republic
+
+	Team leader: Radek Švarz
+	From: Prague, Czech republics
+
+/* SITE */
+	Last update:2015/06/14
+	Language: Czech
+	Doctype: HTML5
+	Software: PhpStorm
+	Components: php slim, Bootstrap, Leaflet, jQuery
