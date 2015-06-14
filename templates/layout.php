@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title><?= isset($title) ? htmlspecialchars($title) . ' - ' : '' ?>Byty Otevřeně</title>
-    <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -34,34 +33,6 @@
     <script src="<?= $baseUrl ?>/assets/leaflet.usermarker.js"></script>
     <script src="<?= $baseUrl ?>/assets/util.js"></script>
     <script src="http://seiyria.github.io/bootstrap-slider/javascripts/bootstrap-slider.js"></script>
-    <script>
-        function toggleFullScreen() {
-            if (!document.fullscreenElement &&    // alternative standard method
-                !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
-                if (document.documentElement.requestFullscreen) {
-                    document.documentElement.requestFullscreen();
-                } else if (document.documentElement.msRequestFullscreen) {
-                    document.documentElement.msRequestFullscreen();
-                } else if (document.documentElement.mozRequestFullScreen) {
-                    document.documentElement.mozRequestFullScreen();
-                } else if (document.documentElement.webkitRequestFullscreen) {
-                    document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-                }
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                }
-            }
-        }
-
-
-    </script>
     <?php if (!empty($js)): ?>
         <?php foreach ($js as $script): ?>
             <script src="<?= $script ?>"></script>
@@ -199,7 +170,6 @@
     </div>
 </div>
 
-
 <script>
 
     $(function() {
@@ -225,8 +195,6 @@
         });
     });
 </script>
-
-
 
 </body>
 </html>
