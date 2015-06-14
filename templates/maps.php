@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <p style="font-size: 1.5em">
-                                Nájemné: <span id="flat-rent"></span> Kč <br>
+                                Nájemné: <span id="flat-rent"></span> <br>
                                 Plocha: <span id="flat-area"></span> m2 <br>
                                 Stav: <span id="flat-status"></span> <br>
                             </p>

@@ -26,19 +26,31 @@ function refreshMarkers(data)
             street += '/' + flat.properties.num_orient;
         }
 
+        var rent = flat.properties.rent;
+        if (rent == 0 || rent == null) {
+            rent = 'neupřesněno';
+        } else {
+            rent += ' Kč';
+        }
+
+        var status = flat.properties.status;
+        if (status == null) {
+            status = 'neznámý';
+        }
+
         marker.bindPopup(
             '<p style="font-size: 1.5em">' +
             '<strong>' + street + '</strong><br>' +
-            'Nájemné: ' + flat.properties.rent +' Kč<br>' +
+            'Nájemné: ' + rent + '<br>' +
             'Plocha: ' + flat.properties.area + ' m2<br>' +
-            'Stav: ' + flat.properties.status + '<br>' +
+            'Stav: ' + status + '<br>' +
             '<a href="#"' +
             'data-toggle="modal"' +
             'data-target="#modal-flat" ' +
             'data-title="' + street + '" ' +
-            'data-rent="' + flat.properties.rent + '" ' +
+            'data-rent="' + rent + '" ' +
             'data-area="' + flat.properties.area + '" ' +
-            'data-status="' + flat.properties.status + '" ' +
+            'data-status="' + status + '" ' +
             'data-district="' + flat.properties.city_district + '" ' +
             '">Zobrazit detail nabídky</a>' +
             '</p>'
