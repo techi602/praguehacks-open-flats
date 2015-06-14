@@ -67,6 +67,49 @@
         loadGeoData();
     });
 
+    var markers = [];
+
+    function deletePreviousMarkers()
+    {
+        for (i = 0; i < markers.length; i++) {
+            map.removeLayer(markers[i]);
+        }
+    }
+
+    function refreshMarkers(data)
+    {
+        deletePreviousMarkers();
+        flats = data.features;
+
+        flats.forEach(function (flat, key) {
+            marker = L.marker([flat.geometry.coordinates[1], flat.geometry.coordinates[0]]);
+            var street = flat.properties.street + ' ' + flat.properties.num_desc;
+            if (flat.num_orient){
+                street += '/' + flat.properties.num_orient;
+            }
+
+            marker.bindPopup(
+                '<p style="font-size: 1.5em">' +
+                '<strong>' + street + '</strong><br>' +
+                'Nájemné: ' + flat.properties.rent +' Kč<br>' +
+                'Plocha: ' + flat.properties.area + ' m2<br>' +
+                'Stav: ' + flat.properties.status + '<br>' +
+                '<a href="#"' +
+                'data-toggle="modal"' +
+                'data-target="#modal-flat" ' +
+                'data-title="' + street + '" ' +
+                'data-rent="' + flat.properties.rent + '" ' +
+                'data-area="' + flat.properties.area + '" ' +
+                'data-status="' + flat.properties.status + '" ' +
+                'data-district="' + flat.properties.city_district + '" ' +
+                '">Zobrazit detail nabídky</a>' +
+                '</p>'
+            );
+            marker.addTo(map);
+            markers.push(marker);
+        });
+    }
+
     function loadGeoData()
     {
         var id = window.setTimeout(function() {}, 0);
@@ -77,7 +120,7 @@
 
         var latLng = map.getCenter();
 
-        var url =  "<?= $baseUrl ?>/data/flats-geo.json";
+        var url =  "<?= $dataUrl ?>";
 
         url += '?area=' + $('#area').val();
         url += '&price=' + $('#price').val();
@@ -87,36 +130,27 @@
 
         console.log(url);
 
-        $.getJSON(url, function( data ) {
-            flats = data.features;
-
-            flats.forEach(function (flat, key) {
-                marker = L.marker([flat.geometry.coordinates[1], flat.geometry.coordinates[0]]);
-                var street = flat.properties.street + ' ' + flat.properties.num_desc;
-                if (flat.num_orient){
-                    street += '/' + flat.properties.num_orient;
-                }
-
-                marker.bindPopup(
-                    '<p style="font-size: 1.5em">' +
-                    '<strong>' + street + '</strong><br>' +
-                    'Nájemné: ' + flat.properties.rent +' Kč<br>' +
-                    'Plocha: ' + flat.properties.area + ' m2<br>' +
-                    'Stav: ' + flat.properties.status + '<br>' +
-                    '<a href="#"' +
-                    'data-toggle="modal"' +
-                    'data-target="#modal-flat" ' +
-                    'data-title="' + street + '" ' +
-                    'data-rent="' + flat.properties.rent + '" ' +
-                    'data-area="' + flat.properties.area + '" ' +
-                    'data-status="' + flat.properties.status + '" ' +
-                    'data-district="' + flat.properties.city_district + '" ' +
-                    '">Zobrazit detail nabídky</a>' +
-                    '</p>'
-                );
-                marker.addTo(map);
-            });
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            url: url,
+            crossDomain: true,
+            success: function (data, textStatus, jqXHR) {
+                console.log(data);
+                refreshMarkers(data);
+            },
+            error: function (responseData, textStatus, errorThrown) {
+                alert('Request failed.' + textStatus);
+            }
         });
+
+
+
+/*
+        $.getJSON(url, function( data ) {
+            refreshMarkers(data);
+        });
+        */
     }
 
     var map = L.map('map', {
@@ -196,13 +230,13 @@
                             </p>
                         </div>
                         <div class="col-md-4">
-                            <a href="#" style="font-size: 2em">
-                                <span class="glyphicon glyphicon-thumbs-up"></span>
-                            </a>
+                            <a href="#" style="font-size: 4em">
+                                <span class="glyphicon glyphicon-thumbs-up"></span><!--
+                            --></a>
 
                             &nbsp;&nbsp;
 
-                            <a href="#" style="font-size: 2em">
+                            <a href="#" style="font-size: 4em">
                                 <span class="glyphicon glyphicon-thumbs-down"></span>
                             </a>
                         </div>

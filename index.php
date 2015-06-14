@@ -54,6 +54,13 @@ $app->get('/detail', function () use ($app) {
     ));
 });
 
-$app->view()->set('baseUrl', '');
+
+//$dataUrl = '/praguehacks/data/flats-geo.json';
+$dataUrl = 'http://praguehacks-open-flats-data.mybluemix.net/flats';
+//$baseUrl = '/praguehacks';
+$baseUrl = '';
+
+$app->view()->set('dataUrl', $dataUrl);
+$app->view()->set('baseUrl', $baseUrl);
 $app->run();
 
