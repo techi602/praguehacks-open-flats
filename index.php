@@ -29,7 +29,7 @@ $app->get('/', function () use ($app) {
     ));
 });
 
-$app->get('/maps', function () use ($app) {
+$app->get('/maps', function () use ($app, $baseUrl) {
 
     /*
     $client = new Zend\Http\Client();
@@ -43,11 +43,13 @@ $app->get('/maps', function () use ($app) {
     $app->render('maps.php', array(
         'page' => 'maps',
         'data' => array(),
+        'js' => array(
+            $baseUrl . '/assets/maps.js',
+        ),
     ));
-
 });
 
-$app->get('/google', function () use ($app) {
+$app->get('/google', function () use ($app, $baseUrl) {
     $app->render('google.php', array(
         'page' => 'google',
         'data' => array(),
