@@ -146,7 +146,7 @@
                 <span id="price-range" class="text-nowrap"></span>
             </div>
             <div class="col-md-2">
-                Plocha (m2):
+                Plocha (m<sup>2</sup>):
             </div>
             <div class="col-md-4">
                 <input id="area" type="text" class="span2" value="" data-slider-min="10" data-slider-max="300" data-slider-step="5" data-slider-value="[20,100]">

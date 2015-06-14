@@ -11,7 +11,7 @@
                     <div class="col-md-6">
                         <p style="font-size: 1.5em">
                             Nájemné: <span id="flat-rent"></span> <br>
-                            Plocha: <span id="flat-area"></span> m2 <br>
+                            Plocha: <span id="flat-area"></span> m<sup>2</sup> <br>
                             Stav: <span id="flat-status"></span> <br>
                         </p>
                     </div>
