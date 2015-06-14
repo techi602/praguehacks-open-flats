@@ -2,28 +2,29 @@
 	Frontend developer: Michal Vrchota
 	Site: http://www.techi.cz
 	Twitter: @techi602
-	From: Prague, Czech republic
+	From: Prague, Czech Republic
 
 	Backend developer: Ondřej Ešler
-	From: Pilsen, Czech republic
+	From: Pilsen, Czech Republic
 	Twitter: @ondrejesler
 
-	Map specialist: Jindřich Mynarz
-	From: Prague, Czech republic
+	Data janitor: Jindřich Mynarz
+	From: Prague, Czech Republic
 	Twitter: @jindrichmynarz
 
 	Data analyst: Tereza Praksova
-	From: Prague, Czech republic
+	From: Prague, Czech Republic
+	Twitter: @TPraksova
 
 	Team leader: Radek Švarz
-	From: Prague, Czech republic
+	From: Prague, Czech Republic
 
 	Open data mentor: Ondřej Profant
-	From: Prague, Czech republic
+	From: Prague, Czech Republic
 	Twitter: @ondrej_profant
 
 /* SITE */
-	Last update:2015/06/14
+	Last update: 2015/06/14
 	Language: Czech
 	Doctype: HTML5
 	Software: PhpStorm
