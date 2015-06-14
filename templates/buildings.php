@@ -75,7 +75,17 @@
                     crs: APP.crs}
             ).setView(center, 13);
 
+
+            map.on('locationfound', onLocationFound);
+            map.on('locationerror', onLocationError);
             map.on('dragend', onDragEnd);
+            map.locate({
+                watch: false,
+                locate: true,
+                setView: true,
+                enableHighAccuracy: false
+            });
+
             loadGeoData();
             /*
             $.getJSON(window.DATA_URL, function (data) {

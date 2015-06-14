@@ -79,7 +79,12 @@
         map.on('locationfound', onLocationFound);
         map.on('locationerror', onLocationError);
         map.on('dragend', onDragEnd);
-        map.locate({setView: true, maxZoom: 14});
+        map.locate({
+            watch: false,
+            locate: true,
+            setView: true,
+            enableHighAccuracy: false
+        });
 
         loadGeoData();
     });

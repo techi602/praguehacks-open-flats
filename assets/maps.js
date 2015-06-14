@@ -4,6 +4,9 @@ var cluster = L.markerClusterGroup();
 
 var map;
 
+var usermarker;
+
+
 function deletePreviousMarkers()
 {
     for (i = 0; i < markers.length; i++) {
@@ -107,13 +110,11 @@ function loadGeoData()
     });
 }
 
-function onLocationFound(e) {
-    var radius = e.accuracy / 2;
-
-    L.marker(e.latlng).addTo(map)
-        .bindPopup("Nacházíte se přibližně " + radius + " metrů od této pozice").openPopup();
-
-    L.circle(e.latlng, radius).addTo(map);
+function onLocationFound(location) {
+    usermarker = L.userMarker(location.latlng, {pulsing:true, accuracy:location.accuracy, smallIcon:true});
+    usermarker.addTo(map);
+    usermarker.setLatLng(location.latlng);
+    usermarker.setAccuracy(location.accuracy);
 }
 
 function onLocationError(e) {

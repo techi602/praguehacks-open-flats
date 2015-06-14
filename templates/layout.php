@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
     <link rel="stylesheet" href="<?= $baseUrl ?>/assets/styles.css">
     <link rel="stylesheet" href="<?= $baseUrl ?>/assets/leaflet.markercluster.css">
+    <link rel="stylesheet" href="<?= $baseUrl ?>/assets/leaflet.usermarker.css">
     <link rel="stylesheet" href="http://seiyria.github.io/bootstrap-slider/stylesheets/bootstrap-slider.css">
     <link type="text/plain" rel="author" href="<?= $baseUrl ?>/humans.txt">
 
@@ -30,6 +31,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
     <script src="<?= $baseUrl ?>/assets/store.min.js"></script>
     <script src="<?= $baseUrl ?>/assets/leaflet.markercluster.js"></script>
+    <script src="<?= $baseUrl ?>/assets/leaflet.usermarker.js"></script>
     <script src="<?= $baseUrl ?>/assets/util.js"></script>
     <script src="http://seiyria.github.io/bootstrap-slider/javascripts/bootstrap-slider.js"></script>
     <script>
