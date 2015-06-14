@@ -42,4 +42,4 @@
 
 </script>
 
-<?= include 'modal.php' ?>
+<?php include 'modal.php' ?>
